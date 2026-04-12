@@ -1,4 +1,5 @@
 using MonitorDevicesService.data;
+using MonitorDevicesService.models;
 
 namespace MonitorDevicesService {
     public class Worker : BackgroundService {
@@ -12,17 +13,36 @@ namespace MonitorDevicesService {
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
             var devices = _devices.GetDevices();
+            var random = new Random();
 
-            _logger.LogInformation("Worker initiated at: {time}", DateTimeOffset.Now);
+            _logger.LogInformation("Worker initiated at: {time}", GetDateTimeNow());
 
             while (!stoppingToken.IsCancellationRequested) {
-                if (_logger.IsEnabled(LogLevel.Information)) {
-                    foreach (var device in devices) {
-                        _logger.LogInformation("Checking device: {name} - {ip}", device.Name, device.Ip);
-                    }
-                    await Task.Delay(1000, stoppingToken);
+                foreach (var device in devices) {
+                    CheckDevice(device, random);
                 }
+
+                await Task.Delay(10000, stoppingToken);
             }
+        }
+        private string GenerateDeviceStatus(Random random) {
+            bool isOnline = random.Next(0, 100) > 30;
+            return isOnline ? "Online" : "Offline";
+        }
+
+        private void CheckDevice(Device device, Random random) {
+            try {
+                var status = GenerateDeviceStatus(random);
+                _logger.LogInformation("{time} - {device} - {status}", GetDateTimeNow(), device.Name, status);
+            }
+
+            catch (Exception ex) {
+                _logger.LogError(ex, "Erro ao verificar dispositivo {device}", device.Name);
+            }
+        }
+
+        private string GetDateTimeNow() {
+            return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
     }
 }
