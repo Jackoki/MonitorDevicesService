@@ -1,5 +1,4 @@
 using MonitorDevicesService.data;
-using MonitorDevicesService.models;
 using MonitorDevicesService.services;
 using MonitorDevicesService.utils;
 

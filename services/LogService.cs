@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MonitorDevicesService.services {
+﻿namespace MonitorDevicesService.services {
     public class LogService {
         public void WriteLogToFile(string message) {
-            string directory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs");
+
+            string basePath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
+
+            string directory = Path.Combine(basePath, "logs");
             Directory.CreateDirectory(directory);
 
             string path = Path.Combine(directory, "logs.txt");
