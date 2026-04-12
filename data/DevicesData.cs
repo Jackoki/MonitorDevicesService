@@ -7,16 +7,14 @@ using MonitorDevicesService.models;
 
 namespace MonitorDevicesService.data {
     public class DevicesData {
-        List<Device> devices;
+        private readonly IConfiguration _configuration;
 
-        public DevicesData() {
-            devices = new List<Device>();
-            devices.Add(new Device("CLP Linha 1", "192.168.0.1"));
-            devices.Add(new Device("CLP Linha 2", "192.168.0.2"));
+        public DevicesData(IConfiguration configuration) {
+            _configuration = configuration;
         }
 
         public List<Device> GetDevices() {
-            return devices;
+            return _configuration.GetSection("Devices").Get<List<Device>>();
         }
     }
 }

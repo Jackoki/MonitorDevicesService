@@ -6,15 +6,18 @@ using MonitorDevicesService.utils;
 namespace MonitorDevicesService.worker {
     public class Worker : BackgroundService {
         private readonly ILogger<Worker> _logger;
+        private readonly IConfiguration _configuration;
+
         private readonly DevicesData _devices;
         private readonly DeviceStatusService _statusService;
         private readonly DateUtils _dateUtils;
 
-        public Worker(ILogger<Worker> logger, DevicesData devices, DeviceStatusService statusService, DateUtils dateUtils) {
+        public Worker(ILogger<Worker> logger, DevicesData devices, DeviceStatusService statusService, DateUtils dateUtils, IConfiguration configuration) {
             _logger = logger;
             _devices = devices;
             _statusService = statusService;
             _dateUtils = dateUtils;
+            _configuration = configuration;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
@@ -28,7 +31,8 @@ namespace MonitorDevicesService.worker {
                     _statusService.CheckDevice(device, random);
                 }
 
-                await Task.Delay(10000, stoppingToken);
+                int interval = _configuration.GetValue<int>("IntervalSeconds");
+                await Task.Delay(interval * 1000, stoppingToken);
             }
         }
 
