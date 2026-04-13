@@ -41,3 +41,16 @@ Passo 3: Execute o projeto com a tecla "F5"
 - Tratamento de Exceções: Implementação de tratamento de exceções no arquivo DeviceStatusService para que o Worker continuasse rodando caso uma exceção seja lançada.
 
 # 💬 Prompts de IA Perguntados no Projeto (ChatGPT)
+[Prompt 1](https://github.com/Jackoki/MonitorDevicesService/blob/master/prompts/Prompt%201.pdf)
+
+[Prompt 2](https://github.com/Jackoki/MonitorDevicesService/blob/master/prompts/Prompt%202.pdf)
+
+[Prompt 3](https://github.com/Jackoki/MonitorDevicesService/blob/master/prompts/Prompt%203.pdf)
+
+[Prompt 4](https://github.com/Jackoki/MonitorDevicesService/blob/master/prompts/Prompt%204.pdf)
+
+[Prompt 5](https://github.com/Jackoki/MonitorDevicesService/blob/master/prompts/Prompt%205.pdf)
+
+[Prompt 6](https://github.com/Jackoki/MonitorDevicesService/blob/master/prompts/Prompt%206.pdf)
+
+[Prompt 7](https://github.com/Jackoki/MonitorDevicesService/blob/master/prompts/Prompt%207.pdf)
